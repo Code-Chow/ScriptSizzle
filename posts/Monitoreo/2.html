@@ -1,0 +1,95 @@
+<section class="post">
+    <div>
+        Este script permite obtener información sobre el uso de CPU, RAM y disco duro, mostrando sus porcentajes y los 5 servicios que más consumen RAM y CPU.
+    </div>
+    <div>
+        <pre><code class="language-bash">#!/bin/bash
+
+# Función para mostrar el uso de CPU, RAM y disco
+function mostrar_uso_recursos {
+    echo "----------------------------------------"
+    echo "          Uso de Recursos               "
+    echo "----------------------------------------"
+    
+    # Mostrar uso de CPU
+    echo "Uso de CPU: $(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}')%"
+    
+    # Mostrar uso de RAM
+    echo "Uso de RAM: $(free | grep Mem | awk '{print $3/$2 * 100.0}')%"
+    
+    # Mostrar uso de disco
+    echo "Uso de Disco: $(df -h | grep '/$' | awk '{print $5}')"
+    
+    echo "----------------------------------------"
+}
+
+# Función para mostrar los servicios que más consumen RAM
+function servicios_mas_ram {
+    echo "----------------------------------------"
+    echo "   Servicios que más consumen RAM      "
+    echo "----------------------------------------"
+    ps -eo pid,comm,%mem --sort=-%mem | head -n 6
+}
+
+# Función para mostrar los servicios que más consumen CPU
+function servicios_mas_cpu {
+    echo "----------------------------------------"
+    echo "   Servicios que más consumen CPU      "
+    echo "----------------------------------------"
+    ps -eo pid,comm,%cpu --sort=-%cpu | head -n 6
+}
+
+# Menú principal
+function mostrar_menu {
+    echo "----------------------------------------"
+    echo "     Monitor de Recursos del Sistema    "
+    echo "----------------------------------------"
+    echo "1. Mostrar uso de recursos"
+    echo "2. Mostrar servicios que más consumen RAM"
+    echo "3. Mostrar servicios que más consumen CPU"
+    echo "0. Salir"
+    echo "----------------------------------------"
+    read -p "Selecciona una opción: " opcion
+    case $opcion in
+        1) mostrar_uso_recursos ;;
+        2) servicios_mas_ram ;;
+        3) servicios_mas_cpu ;;
+        0) exit 0 ;;
+        *) echo "Opción no válida. Intenta de nuevo." ;;
+    esac
+}
+
+# Comenzar el script mostrando el menú
+while true; do
+    mostrar_menu
+done
+        </code></pre>
+    </div>
+    <div>
+        <h2 class="title">Cómo usar el script</h2>
+        <p>1. Crear el archivo: Copia el código anterior y pégalo en un archivo llamado <code>monitor_recursos.sh</code>.</p>
+        <p>2. Dar permisos de ejecución: Abre una terminal y navega hasta el directorio donde guardaste el archivo. Luego, ejecuta el siguiente comando para dar permisos de ejecución al script:</p>
+        <pre><code class="language-bash">chmod +x monitor_recursos.sh        </code></pre>
+        <p>3. Ejecutar el script: Inicia el script con el siguiente comando:</p>
+        <pre><code class="language-bash">./monitor_recursos.sh        </code></pre>
+    </div>
+    <div>
+        <h2 class="title">Detalles sobre cómo funciona el script</h2>
+        <p>- Uso de recursos: Al ejecutarse, el script muestra el uso de CPU, RAM y disco.</p>
+        <p>- Servicios que consumen RAM: Muestra los 5 servicios que más RAM utilizan.</p>
+        <p>- Servicios que consumen CPU: Muestra los 5 servicios que más CPU utilizan.</p>
+    </div>
+    <div>
+        <h2 class="title">Notas adicionales</h2>
+        <p>- Este script puede requerir permisos de superusuario para acceder a información de ciertos procesos, por lo que se te puede pedir la contraseña de <code>sudo</code>.</p>
+        <p>- Asegúrate de tener instalado <code>ps</code>, <code>top</code>, y <code>free</code> en tu sistema.</p>
+    </div>
+    <div>
+        <h2 class="title">Enlaces Relacionados</h2>
+        <ul>
+            <li><a href="https://man7.org/linux/man-pages/man1/top.1.html" target="_blank">Documentación de top</a></li>
+            <li><a href="https://man7.org/linux/man-pages/man1/free.1.html" target="_blank">Documentación de free</a></li>
+            <li><a href="https://man7.org/linux/man-pages/man1/ps.1.html" target="_blank">Documentación de ps</a></li>
+        </ul>
+    </div>
+</section>
