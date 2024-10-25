@@ -3,6 +3,7 @@ const blogTitle="ScriptSizzle"
 const blogDesc = "Tu repositorio de referencia"
 const footCenter="By CodeChow Community"
 const footLat = "main.codechow@gmail.com"
+const pathPosts = 'https://raw.githubusercontent.com/Code-Chow/ScriptSizzle/refs/heads/main/posts'
 var adsCant = 6
 const adsContent=[
     {
