@@ -13,7 +13,7 @@
     --l-border: 0.5vw;
     --l-top-border: var(--l-border) var(--l-border) 0px 0px;
     --m-top-border: var(--m-border) var(--m-border) 0px 0px;
-    --R-post-size:56px;
+    --R-post-size:165px;
     --L-post-size:calc(100vw - (var(--R-post-size) - 1vh));
     --L-post-in-size:calc(100vw - (var(--R-post-size) - 2.6vh));
     --WSlides:5vw;
