@@ -58,13 +58,13 @@ const dataToPosts = {
             "img":"https://trac.ffmpeg.org/ffmpeg-logo.png"
         },
     ],
-    "Trucos":[
+    "Repositorios":[
         {
-            "title":"blog 1ww",
-            "description":"blog 1ww",
+            "title":"Repositorios Utiles",
+            "description":"Repositorios Utiles",
             "date":"02/02/2024",
             "id":"1",
-            "img":"https://trac.ffmpeg.org/ffmpeg-logo.png"
+            "img":"https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png"
         },
     ],
 
